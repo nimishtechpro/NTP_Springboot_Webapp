@@ -10,6 +10,7 @@ public class TechproApplication {
 		SpringApplication.run(TechproApplication.class, args);
 		System.out.println("=== Application Started ! ===");
 		System.out.println("URL : http://localhost:8080/api/v1/welcome ");
+		System.out.println("Swagger UI : http://localhost:8080/api/v1/swagger-ui/index.html");
 		System.out.println("================================");
 	}
 
