@@ -11,6 +11,8 @@ public class TechproApplication {
 		System.out.println("=== Application Started ! ===");
 		System.out.println("URL : http://localhost:8080/api/v1/welcome ");
 		System.out.println("Swagger UI : http://localhost:8080/api/v1/swagger-ui/index.html");
+		System.out.println("H2 Database console : http://localhost:8080/api/v1/h2-console/");
+		System.out.println("Database console : username : sa , Password : password");
 		System.out.println("================================");
 	}
 
