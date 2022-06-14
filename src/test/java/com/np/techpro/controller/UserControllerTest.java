@@ -13,7 +13,6 @@ public class UserControllerTest {
     @LocalServerPort
     private int port;
 
-
     @Test
     public void testUser() {
 
