@@ -1,0 +1,46 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.8'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.np'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '18'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// START- Configuration for h2 database connection
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'
+	//END - Configuration for h2 database connection
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui
+	// For Swagger UI
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.9'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//BEGIN - REST Assured configuration -
+	// https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+	// faced issue due to version mismatch (Error message indicated the correct version 4.4.0)
+	testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.4.0'
+	// https://mvnrepository.com/artifact/org.hamcrest/hamcrest
+	testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
+	//END - REST Assured configuration -
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
