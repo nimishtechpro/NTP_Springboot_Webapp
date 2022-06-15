@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -22,13 +24,19 @@ public class UserServiceImpl implements UserService{
         User user = new User();
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
-        User newUser = userRepository.save(user);
+
 
         Address address = new Address();
         address.setAddressLine(userDto.getAddressLine());
         address.setState(userDto.getState());
         address.setZipCode(userDto.getZipCode());
-        addressRepository.save(address);
+
+        List<Address> addressList = new ArrayList<Address>();
+        addressList.add(address);
+        user.setAddressList(addressList);
+
+        User newUser = userRepository.save(user);
+      //  addressRepository.save(address);
         userDto.setUserId(newUser.getId());
         userDto.setAddressId(newUser.getId());
         return userDto;
