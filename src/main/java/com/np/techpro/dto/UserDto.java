@@ -11,4 +11,5 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private List<AddressDto> addressList;
+    private Long salaryAmount;
 }

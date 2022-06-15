@@ -3,6 +3,7 @@ package com.np.techpro.service;
 import com.np.techpro.dto.AddressDto;
 import com.np.techpro.dto.UserDto;
 import com.np.techpro.model.Address;
+import com.np.techpro.model.Salary;
 import com.np.techpro.model.User;
 import com.np.techpro.repository.AddressRepository;
 import com.np.techpro.repository.UserRepository;
@@ -34,7 +35,10 @@ public class UserServiceImpl implements UserService{
                 addressList.add(address);
             }
         user.setAddressList(addressList);
-        // Save user should save address as well
+        Salary salary = new Salary();
+        salary.setAmount(userDto.getSalaryAmount());
+        user.setSalary(salary);
+        // Save user should save address & salary as well
         User newUser = userRepository.save(user);
         userDto.setUserId(newUser.getUserId());
         return userDto;

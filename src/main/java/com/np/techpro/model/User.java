@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.List;
 
 @Entity
@@ -21,10 +22,16 @@ public class User {
     private String firstName;
     private String lastName;
 
+
     @OneToMany(targetEntity = Address.class, cascade = CascadeType.ALL)
-    //name - user -address foreign key
+    //name - user-address foreign key
     @JoinColumn(name = "user_address_fk", referencedColumnName = "userId")
     private List<Address> addressList;
 
+    // owning side and reference side
+    @OneToOne(targetEntity = Salary.class, cascade = CascadeType.ALL)
+    //name - user-salary foreign key
+    @JoinColumn(name = "user_salary_fk", referencedColumnName = "salaryId")
+    private Salary salary;
 
 }
