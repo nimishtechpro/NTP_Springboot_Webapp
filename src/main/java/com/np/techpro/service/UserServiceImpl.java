@@ -1,5 +1,6 @@
 package com.np.techpro.service;
 
+import com.np.techpro.dto.AddressDto;
 import com.np.techpro.dto.UserDto;
 import com.np.techpro.model.Address;
 import com.np.techpro.model.User;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -22,15 +25,19 @@ public class UserServiceImpl implements UserService{
         User user = new User();
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
+        List<Address> addressList = new ArrayList<Address>();
+            for (AddressDto addressDto: userDto.getAddressList()){
+                Address address = new Address();
+                address.setAddressLine(addressDto.getAddressLine());
+                address.setState(addressDto.getState() );
+                address.setZipCode(addressDto.getZipCode());
+                addressList.add(address);
+            }
+        user.setAddressList(addressList);
+        // Save user should save address as well
         User newUser = userRepository.save(user);
 
-        Address address = new Address();
-        address.setAddressLine(userDto.getAddressLine());
-        address.setState(userDto.getState());
-        address.setZipCode(userDto.getZipCode());
-        addressRepository.save(address);
-        userDto.setUserId(newUser.getId());
-        userDto.setAddressId(newUser.getId());
+        userDto.setUserId(newUser.getUserId());
         return userDto;
     }
 }
