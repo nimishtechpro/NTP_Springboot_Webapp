@@ -1,8 +1,10 @@
 package com.np.techpro.service;
 
 import com.np.techpro.dto.AddressDto;
+import com.np.techpro.dto.OrganizationDto;
 import com.np.techpro.dto.UserDto;
 import com.np.techpro.model.Address;
+import com.np.techpro.model.Organization;
 import com.np.techpro.model.Salary;
 import com.np.techpro.model.User;
 import com.np.techpro.repository.AddressRepository;
@@ -35,6 +37,19 @@ public class UserServiceImpl implements UserService{
                 addressList.add(address);
             }
         user.setAddressList(addressList);
+
+        List<Organization> organizations = new ArrayList<Organization>();
+        for (OrganizationDto organizationDto: userDto.getOrganizationList()){
+            Organization organization = new Organization();
+            organization.setLocation(organizationDto.getLocation());
+            organization.setName(organizationDto.getName());
+            organizations.add(organization);
+        }
+
+        user.setOrganizations(organizations);
+        user.setAddressList(addressList);
+
+
         Salary salary = new Salary();
         salary.setAmount(userDto.getSalaryAmount());
         user.setSalary(salary);
